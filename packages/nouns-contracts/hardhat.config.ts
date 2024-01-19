@@ -23,6 +23,10 @@ const config: HardhatUserConfig = {
     },
   },
   networks: {
+    blast_sepolia: {
+      url: 'https://sepolia.blast.io',
+      accounts: [process.env.WALLET_PRIVATE_KEY!].filter(Boolean),
+    },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       accounts: [process.env.WALLET_PRIVATE_KEY!].filter(Boolean),
@@ -50,7 +54,19 @@ const config: HardhatUserConfig = {
     },
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      blast_sepolia: "blast_sepolia", // apiKey is not required, just set a placeholder
+    },
+    customChains: [
+      {
+        network: "blast_sepolia",
+        chainId: 168587773,
+        urls: {
+          apiURL: "https://api.routescan.io/v2/network/testnet/evm/168587773/etherscan",
+          browserURL: "https://testnet.blastscan.io"
+        }
+      }
+    ]
   },
   abiExporter: {
     path: './abi',

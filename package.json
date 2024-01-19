@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "lerna": "lerna",
-    "build": "lerna run build",
+    "build": "NODE_OPTIONS=--openssl-legacy-provider lerna run build",
     "test": "lerna run --parallel test",
     "clean": "lerna run --parallel clean",
     "prepare": "lerna run prepare --scope=@nouns/{assets,contracts,sdk}",
