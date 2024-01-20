@@ -29,6 +29,7 @@ import pastAuctions, { addPastAuctions } from './state/slices/pastAuctions';
 import LogsUpdater from './state/updaters/logs';
 import config, {
   CHAIN_ID,
+  ChainId_Blast_Sepolia,
   ChainId_Sepolia,
   createNetworkHttpUrl,
   multicallOnLocalhost,
@@ -89,6 +90,7 @@ const supportedChainURLs = {
   [ChainId.Hardhat]: 'http://localhost:8545',
   [ChainId.Goerli]: createNetworkHttpUrl('goerli'),
   [ChainId_Sepolia]: createNetworkHttpUrl('sepolia'),
+  [ChainId_Blast_Sepolia]: 'https://rpc.ankr.com/blast_testnet_sepolia/16d04b6d235a52edf378294021de3ee04ee7ee3b15f8da2cf1ae234a52173d0b',
 };
 
 export const Sepolia: Chain = {

@@ -29,7 +29,7 @@ const AUCTION_HOUSE_PROXY_NONCE_OFFSET = 9;
 const GOVERNOR_N_DELEGATOR_NONCE_OFFSET = 23;
 
 task('deploy-short-times-dao-v3', 'Deploy all Nouns contracts with short gov times for testing')
-  .addFlag('autoDeploy', 'Deploy all contracts without user interaction')
+  .addFlag('autodeploy', 'Deploy all contracts without user interaction')
   .addOptionalParam('weth', 'The WETH contract address', undefined, types.string)
   .addOptionalParam('noundersdao', 'The nounders DAO contract address', undefined, types.string)
   .addOptionalParam(

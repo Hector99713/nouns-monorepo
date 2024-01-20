@@ -25,7 +25,8 @@ interface AppConfig {
 }
 
 export const ChainId_Sepolia = 11155111;
-type SupportedChains = ChainId.Mainnet | ChainId.Hardhat | ChainId.Goerli | typeof ChainId_Sepolia;
+export const ChainId_Blast_Sepolia = 168587773;
+type SupportedChains = ChainId.Mainnet | ChainId.Hardhat | ChainId.Goerli | typeof ChainId_Sepolia | typeof ChainId_Blast_Sepolia;
 
 interface CacheBucket {
   name: string;
@@ -94,6 +95,12 @@ const app: Record<SupportedChains, AppConfig> = {
     subgraphApiUri: 'http://localhost:8000/subgraphs/name/nounsdao/nouns-subgraph',
     enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
   },
+  [ChainId_Blast_Sepolia]: {
+    jsonRpcUri: 'https://sepolia.blast.io',
+    wsRpcUri: '',
+    subgraphApiUri: '',
+    enableHistory: process.env.REACT_APP_ENABLE_HISTORY === 'true',
+  }
 };
 
 const externalAddresses: Record<SupportedChains, ExternalContractAddresses> = {
@@ -137,13 +144,26 @@ const externalAddresses: Record<SupportedChains, ExternalContractAddresses> = {
     steth: undefined,
     nounsStreamFactory: undefined,
   },
+  [ChainId_Blast_Sepolia]: {
+    lidoToken: undefined,
+    usdcToken: undefined,
+    payerContract: undefined,
+    tokenBuyer: undefined,
+    chainlinkEthUsdc: undefined,
+    weth: '0xA37F751177Ad228a434f3e7829615c6124902178',
+    steth: undefined,
+    nounsStreamFactory: undefined,
+  }
 };
 
 const getAddresses = (): ContractAddresses => {
   let nounsAddresses = {} as NounsContractAddresses;
   try {
     nounsAddresses = getContractAddressesForChainOrThrow(CHAIN_ID);
-  } catch { }
+    console.log("get addrs:",JSON.stringify(nounsAddresses, null, 2))
+  } catch { 
+    console.log("get addr err.:%s",JSON.stringify(nounsAddresses, null, 2))
+  }
   return { ...nounsAddresses, ...externalAddresses[CHAIN_ID] };
 };
 

@@ -24,7 +24,7 @@ const config: HardhatUserConfig = {
   },
   networks: {
     blast_sepolia: {
-      url: 'https://sepolia.blast.io',
+      url: 'https://rpc.ankr.com/blast_testnet_sepolia/16d04b6d235a52edf378294021de3ee04ee7ee3b15f8da2cf1ae234a52173d0b',
       accounts: [process.env.WALLET_PRIVATE_KEY!].filter(Boolean),
     },
     mainnet: {
